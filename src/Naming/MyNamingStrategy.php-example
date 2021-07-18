@@ -1,0 +1,33 @@
+<?php
+
+use JMS\Serializer\Metadata\PropertyMetadata;
+use JMS\Serializer\Naming\PropertyNamingStrategyInterface;
+
+/**
+ * Class MyNamingStrategy.
+ */
+class MyNamingStrategy implements PropertyNamingStrategyInterface
+{
+    private $separator;
+    private $lowerCase;
+
+    public function __construct($separator = '_', $lowerCase = true)
+    {
+        $this->separator = $separator;
+        $this->lowerCase = $lowerCase;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function translateName(PropertyMetadata $property)
+    {
+        $name = preg_replace('/[A-Z]/', $this->separator . '\\0', $property->name);
+
+        if ($this->lowerCase) {
+            return strtolower($name);
+        }
+
+        return ucfirst($name);
+    }
+}

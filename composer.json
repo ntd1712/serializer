@@ -1,0 +1,34 @@
+{
+  "name": "chaos/serializer",
+  "description": "Factory for creating Serializer objects",
+  "keywords": [
+    "vietnam",
+    "serializer",
+    "deserializer",
+    "factory"
+  ],
+  "homepage": "https://github.com/ntd1712",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "ntd1712",
+      "email": "ntd1712@mail.com"
+    }
+  ],
+  "require": {
+    "jms/serializer": "3.13.*"
+  },
+  "require-dev": {
+    "psr/container": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Chaos\\Support\\Serializer\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  }
+}

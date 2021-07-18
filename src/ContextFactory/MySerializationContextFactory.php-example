@@ -1,0 +1,18 @@
+<?php
+
+use JMS\Serializer\ContextFactory\SerializationContextFactoryInterface;
+use JMS\Serializer\SerializationContext;
+
+/**
+ * Class MySerializationContextFactory.
+ */
+class MySerializationContextFactory implements SerializationContextFactoryInterface
+{
+    /**
+     * {@inheritDoc}
+     */
+    public function createSerializationContext()
+    {
+        return new SerializationContext();
+    }
+}

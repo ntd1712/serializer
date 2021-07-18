@@ -1,0 +1,18 @@
+<?php
+
+use JMS\Serializer\ContextFactory\DeserializationContextFactoryInterface;
+use JMS\Serializer\DeserializationContext;
+
+/**
+ * Class MyDeserializationContextFactory.
+ */
+class MyDeserializationContextFactory implements DeserializationContextFactoryInterface
+{
+    /**
+     * {@inheritDoc}
+     */
+    public function createDeserializationContext()
+    {
+        return new DeserializationContext();
+    }
+}

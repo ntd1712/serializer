@@ -1,0 +1,47 @@
+<?php
+
+use JMS\Serializer\Construction\ObjectConstructorInterface;
+use JMS\Serializer\DeserializationContext;
+use JMS\Serializer\Metadata\ClassMetadata;
+use JMS\Serializer\Visitor\DeserializationVisitorInterface;
+
+/**
+ * Class InitializedObjectConstructor.
+ *
+ * @see \JMS\Serializer\Tests\Fixtures\InitializedObjectConstructor
+ */
+class InitializedObjectConstructor implements ObjectConstructorInterface
+{
+    private $fallbackConstructor;
+
+    /**
+     * Constructor.
+     *
+     * @param \JMS\Serializer\Construction\ObjectConstructorInterface $fallbackConstructor Fallback object constructor
+     */
+    public function __construct(ObjectConstructorInterface $fallbackConstructor)
+    {
+        $this->fallbackConstructor = $fallbackConstructor;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @param \JMS\Serializer\Visitor\DeserializationVisitorInterface $visitor
+     * @param \JMS\Serializer\Metadata\ClassMetadata $metadata
+     * @param mixed $data
+     * @param array $type
+     * @param \JMS\Serializer\DeserializationContext $context
+     *
+     * @return null|object
+     */
+    public function construct(DeserializationVisitorInterface $visitor, ClassMetadata $metadata, $data, array $type,
+                              DeserializationContext $context): ?object
+    {
+        if ($context->hasAttribute('target') && 1 === $context->getDepth()) {
+            return $context->getAttribute('target');
+        }
+
+        return $this->fallbackConstructor->construct($visitor, $metadata, $data, $type, $context);
+    }
+}
